@@ -2,24 +2,34 @@ __author__ = 'rike'
 
 import pyodbc
 
-
-class Repository():
-
-
-    def __init__(self):
-        self.connection_string = 'DRIVER={SQL Server};SERVER=epdbdev01;DATABASE=epdata0137;Trusted_Connection=yes;'
+connection_string = 'DRIVER={SQL Server};SERVER=epdbdev01;DATABASE=enrollment0137;Trusted_Connection=yes;'
 
 
-    def get_bland_slugs(self):
+def get_bland_slugs():
 
-        connection = pyodbc.connect(self.connection_string)
-        cursor = connection.cursor()
-        cursor.execute("SELECT BrandSlug FROM brand")
+    connection = pyodbc.connect(connection_string)
+    cursor = connection.cursor()
+    cursor.execute("SELECT BrandSlug FROM epdata_brand")
 
-        rows = cursor.fetchall()
+    rows = cursor.fetchall()
 
-        brand_slugs = []
-        for row in rows:
-            brand_slugs.append(row.BrandSlug)
+    brand_slugs = []
+    for row in rows:
+        brand_slugs.append(row.BrandSlug)
 
-        return brand_slugs
+    return brand_slugs
+
+
+def get_channels():
+
+    connection = pyodbc.connect(connection_string)
+    cursor = connection.cursor()
+    cursor.execute("SELECT name FROM apiChannels")
+
+    rows = cursor.fetchall()
+
+    channels = []
+    for row in rows:
+        channels.append(row.name)
+
+    return channels

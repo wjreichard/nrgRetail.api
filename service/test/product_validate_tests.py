@@ -1,7 +1,8 @@
+from service import product_validate
+
 __author__ = 'rike'
 
 import unittest
-from services.product import validate
 
 
 class TestValidateProduct(unittest.TestCase):
@@ -10,7 +11,7 @@ class TestValidateProduct(unittest.TestCase):
         schema = {'BrandSlug': {'is_valid_brand_slug': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
         brand_slug = {'BrandSlug': 'nrg_residential'}
 
-        validator = validate.ProductValidator(schema)
+        validator = product_validate.ProductValidator(schema)
         validator.allow_unknown = True
 
         assert(validator.validate(brand_slug) is True)
@@ -20,7 +21,7 @@ class TestValidateProduct(unittest.TestCase):
         schema = {'BrandSlug': {'is_valid_brand_slug': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
         brand_slug = {'BrandSlug': 'foo'}
 
-        validator = validate.ProductValidator(schema)
+        validator = product_validate.ProductValidator(schema)
         validator.allow_unknown = True
 
         self.assertEqual(validator.validate(brand_slug), False)

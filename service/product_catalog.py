@@ -1,7 +1,9 @@
+from service import product_validate
+
 __author__ = 'rike'
 
 import json
-from services.product import validate
+
 
 def create_products(csv_json):
 
@@ -15,7 +17,7 @@ def do_create_products_1(products):
         'Extra': {'type': 'string'}
     }
 
-    validator = validate.ProductValidator(schema_v1)
+    validator = product_validate.ProductValidator(schema_v1)
 
     def validated_products():
         for p in products:
@@ -32,7 +34,7 @@ def do_create_products(products):
         'Extra': {'type': 'string'}
     }
 
-    validator = validate.ProductValidator(schema_v1)
+    validator = product_validate.ProductValidator(schema_v1)
 
     def validated_products():
         for p in products:

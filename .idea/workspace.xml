@@ -2,15 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1657ff0b-314b-4ab9-bcca-6175fe4a902c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/utility/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/product/catalog.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/product_test/catalog_tests.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/utility/converter.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/product_test/test_fixtures.py" />
-      <change type="MOVED" beforePath="C:\_github\nrgRetail.api\services\product_tests\validate_tests.py" afterPath="$PROJECT_DIR$/services/product_test/validate_tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/test/api_tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/domain/test/product_repository_tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/service/test/utility_tests.py" />
+      <change type="DELETED" beforePath="C:\_github\nrgRetail.api\services\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\_github\nrgRetail.api\services\product\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\_github\nrgRetail.api\services\product\catalog.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\_github\nrgRetail.api\services\product\validate.py" afterPath="" />
+      <change type="MOVED" beforePath="C:\_github\nrgRetail.api\domain\product\repository.py" afterPath="$PROJECT_DIR$/domain/product_repository.py" />
+      <change type="MOVED" beforePath="C:\_github\nrgRetail.api\services\product_test\catalog_tests.py" afterPath="$PROJECT_DIR$/service/test/product_catalog_tests.py" />
+      <change type="MOVED" beforePath="C:\_github\nrgRetail.api\services\product_test\test_fixtures.py" afterPath="$PROJECT_DIR$/service/test/product_catalog_test_fixtures.py" />
+      <change type="MOVED" beforePath="C:\_github\nrgRetail.api\services\product_test\validate_tests.py" afterPath="$PROJECT_DIR$/service/test/product_validate_tests.py" />
+      <change type="MOVED" beforePath="C:\_github\nrgRetail.api\services\utility\__init__.py" afterPath="$PROJECT_DIR$/api/test/__init__.py" />
+      <change type="MOVED" beforePath="C:\_github\nrgRetail.api\services\utility\converter.py" afterPath="$PROJECT_DIR$/service/utility_uconverter.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/api.py" afterPath="$PROJECT_DIR$/api/api.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/domain/product/repository.py" afterPath="$PROJECT_DIR$/domain/product/repository.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/product/validate.py" afterPath="$PROJECT_DIR$/services/product/validate.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="nrgRetail.api.iws" />
@@ -34,83 +39,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="api.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/api.py">
+      <file leaf-file-name="product_catalog_tests.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/test/product_catalog_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="15" selection-start="199" selection-end="199" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
-              <folding>
-                <element signature="e#21#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="catalog.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/product/catalog.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="35" selection-start="244" selection-end="244" vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="850">
-              <folding>
-                <element signature="e#21#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="converter.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/utility/converter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="34" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+            <state line="13" column="0" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="952">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="validate.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/product/validate.py">
+      <file leaf-file-name="utility_tests.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/test/utility_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="49" selection-start="772" selection-end="772" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
-              <folding>
-                <element signature="e#21#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="repository.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/domain/product/repository.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="32" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
+            <state line="1" column="0" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="validate_tests.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/services/product_test/validate_tests.py">
+      <file leaf-file-name="product_validate_tests.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/service/test/product_validate_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="45" selection-start="524" selection-end="524" vertical-scroll-proportion="0.44412193" vertical-offset="0" max-vertical-offset="689">
-              <folding>
-                <element signature="e#21#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="catalog_tests.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/product_test/catalog_tests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="0" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0" vertical-offset="161" max-vertical-offset="952">
-              <folding>
-                <element signature="e#21#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_fixtures.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/product_test/test_fixtures.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="14" selection-start="1423" selection-end="1423" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+            <state line="21" column="39" selection-start="681" selection-end="681" vertical-scroll-proportion="0.59008265" vertical-offset="0" max-vertical-offset="646">
               <folding />
             </state>
           </provider>
@@ -151,14 +101,21 @@
         <option value="$PROJECT_DIR$/services/product_test/catalog_tests.py" />
         <option value="$PROJECT_DIR$/domain/product/repository.py" />
         <option value="$PROJECT_DIR$/services/product_test/validate_tests.py" />
+        <option value="$PROJECT_DIR$/service/product_test/validate_tests.py" />
+        <option value="$PROJECT_DIR$/domain/test/product_repository_tests.py" />
+        <option value="$PROJECT_DIR$/api/api_tests.py" />
+        <option value="$PROJECT_DIR$/service/product_validate.py" />
+        <option value="$PROJECT_DIR$/service/utility_uconverter.py" />
+        <option value="$PROJECT_DIR$/service/test/utility_tests.py" />
+        <option value="$PROJECT_DIR$/service/test/product_validate_tests.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1176" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -214,7 +171,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -228,11 +185,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="product_test" />
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nrgRetail.api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nrgRetail.api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -261,82 +232,14 @@
       <recent name="C:\_github\nrgRetail.api\domain" />
       <recent name="C:\_github\nrgRetail.api\api" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\_github\nrgRetail.api\api\test" />
+      <recent name="C:\_github\nrgRetail.api\domain" />
+      <recent name="C:\_github\nrgRetail.api\service\" />
+      <recent name="C:\_github\nrgRetail.api\services\" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in validate_tests (1)">
-    <configuration default="false" name="Unittest TestValidateProduct.test_validate_brand_slug" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="C:\_github\nrgRetail.api\services\product_test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="nrgRetail.api" />
-      <option name="SCRIPT_NAME" value="C:\_github\nrgRetail.api\services\product_tests\validate_tests.py" />
-      <option name="CLASS_NAME" value="TestValidateProduct" />
-      <option name="METHOD_NAME" value="test_validate_brand_slug" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_METHOD" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittest TestValidateProduct.test_validate_brand_slug" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="C:\_github\nrgRetail.api\services\product_test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="nrgRetail.api" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/services/product_tests/validate_tests.py" />
-      <option name="CLASS_NAME" value="TestValidateProduct" />
-      <option name="METHOD_NAME" value="test_validate_brand_slug" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_METHOD" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests in validate_tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="C:\_github\nrgRetail.api\services\product_test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="nrgRetail.api" />
-      <option name="SCRIPT_NAME" value="C:\_github\nrgRetail.api\services\product_tests\validate_tests.py" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <RunnerSettings RunnerId="PyDebugRunner" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PyDebugRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python tests.Unittests in product_validate_tests">
     <configuration default="false" name="Unittests in validate_tests (1)" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -376,6 +279,78 @@
       <option name="METHOD_NAME" value="" />
       <option name="FOLDER_NAME" value="" />
       <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in product_catalog_tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/service/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="nrgRetail.api" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/service/test/product_catalog_tests.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in product_validate_tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/service/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="nrgRetail.api" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/service/test/product_validate_tests.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in C:\_github\nrgRetail.api\service\test" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/service/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="nrgRetail.api" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="$PROJECT_DIR$/service/test" />
+      <option name="TEST_TYPE" value="TEST_FOLDER" />
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
       <option name="PUREUNITTEST" value="true" />
@@ -526,18 +501,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.api" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittest TestValidateProduct.test_validate_brand_slug" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest TestValidateProduct.test_validate_brand_slug" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in validate_tests" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in validate_tests (1)" />
-      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittests in catalog_tests" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in validate_tests (1)" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in catalog_tests" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in product_catalog_tests" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in product_validate_tests" />
+      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittests in C:\_github\nrgRetail.api\service\test" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in validate_tests (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in catalog_tests" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest TestValidateProduct.test_validate_brand_slug" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in validate_tests" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in product_validate_tests" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in product_catalog_tests" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in C:\_github\nrgRetail.api\service\test" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in validate_tests (1)" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in catalog_tests" />
       </list>
     </recent_temporary>
   </component>
@@ -568,22 +544,22 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14427084" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16488095" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3317757" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31413043" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -626,21 +602,17 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/services/product/validate.py">
+    <entry file="file://$PROJECT_DIR$/service/product_validate.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="35" selection-start="124" selection-end="124" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="765">
-          <folding>
-            <element signature="e#21#51#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/product_test/validate_tests.py">
+    <entry file="file://$PROJECT_DIR$/service/test/product_validate_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="51" selection-start="362" selection-end="362" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="442">
-          <folding>
-            <element signature="e#21#36#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -666,20 +638,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/utility/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="25" selection-end="25" vertical-scroll-proportion="0.02489019" vertical-offset="0" max-vertical-offset="683">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/product/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="20" selection-end="20" vertical-scroll-proportion="0.02489019" vertical-offset="0" max-vertical-offset="683">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python33/Lib/json/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5678">
@@ -694,7 +652,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/__init__.py">
+    <entry file="file://$PROJECT_DIR$/service/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="0" selection-start="55" selection-end="55" vertical-scroll-proportion="0.09869376" vertical-offset="0" max-vertical-offset="689">
           <folding />
@@ -703,67 +661,82 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/api.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="15" selection-start="199" selection-end="199" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+        <state line="9" column="15" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
           <folding>
-            <element signature="e#21#31#0" expanded="true" />
+            <element signature="e#78#88#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/product/catalog.py">
+    <entry file="file://$PROJECT_DIR$/service/product_catalog.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="35" selection-start="244" selection-end="244" vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="850">
+        <state line="12" column="35" selection-start="245" selection-end="245" vertical-scroll-proportion="-6.5384617" vertical-offset="34" max-vertical-offset="884">
           <folding>
-            <element signature="e#21#32#0" expanded="true" />
+            <element signature="e#59#70#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/utility/converter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="34" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/product/validate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="49" selection-start="772" selection-end="772" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
-          <folding>
-            <element signature="e#21#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/domain/product/repository.py">
+    <entry file="file://$PROJECT_DIR$/domain/product_repository.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="32" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/product_test/test_fixtures.py">
+    <entry file="file://$PROJECT_DIR$/domain/test/product_repository_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/test/api_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="591">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/utility_uconverter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="37" selection-start="194" selection-end="194" vertical-scroll-proportion="0.20917226" vertical-offset="0" max-vertical-offset="894">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/product_validate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="0" selection-start="489" selection-end="489" vertical-scroll-proportion="0.3232662" vertical-offset="0" max-vertical-offset="901">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/test/product_catalog_test_fixtures.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="14" selection-start="1423" selection-end="1423" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/product_test/catalog_tests.py">
+    <entry file="file://$PROJECT_DIR$/service/test/product_catalog_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0" vertical-offset="8" max-vertical-offset="952">
-          <folding>
-            <element signature="e#21#36#0" expanded="true" />
-          </folding>
+        <state line="13" column="0" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0" vertical-offset="161" max-vertical-offset="952">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/product_test/validate_tests.py">
+    <entry file="file://$PROJECT_DIR$/service/test/utility_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="45" selection-start="524" selection-end="524" vertical-scroll-proportion="0.44412193" vertical-offset="0" max-vertical-offset="689">
-          <folding>
-            <element signature="e#21#36#0" expanded="true" />
-          </folding>
+        <state line="1" column="0" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/test/product_validate_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="39" selection-start="681" selection-end="681" vertical-scroll-proportion="0.59008265" vertical-offset="0" max-vertical-offset="646">
+          <folding />
         </state>
       </provider>
     </entry>

@@ -1,10 +1,9 @@
+from service import product_catalog, utility_uconverter
+
 __author__ = 'rike'
 
 import sys
-import json
 from flask import Flask, request, abort
-from services.utility import converter
-from services.product import catalog
 
 app = Flask(__name__)
 
@@ -30,10 +29,10 @@ def create_products():
         abort(400)
 
     try:
-        convert = converter.Converter()
+        convert = utility_uconverter.Converter()
         csv_json = convert.csv_bytes_to_json(request.data)
 
-        products_service = catalog.Catalog()
+        products_service = product_catalog.Catalog()
         result = products_service.create_products(csv_json)
 
         return result

@@ -3,7 +3,8 @@ __author__ = 'rike'
 import json
 
 
-def csv_bytes_to_json(self, csv_bytes):
+def csv_bytes_to_json(csv_bytes):
+
     rows = csv_bytes.decode("utf-8").splitlines()
 
     csv = []

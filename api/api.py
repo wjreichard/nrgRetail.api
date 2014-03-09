@@ -1,7 +1,6 @@
-from service import product_catalog, utility_uconverter
-
 __author__ = 'rike'
 
+from service import product_catalog, utility_converter
 import sys
 from flask import Flask, request, abort
 
@@ -29,11 +28,9 @@ def create_products():
         abort(400)
 
     try:
-        convert = utility_uconverter.Converter()
-        csv_json = convert.csv_bytes_to_json(request.data)
+        csv_json = utility_converter.csv_bytes_to_json(request.data)
 
-        products_service = product_catalog.Catalog()
-        result = products_service.create_products(csv_json)
+        result = product_catalog.create_products_from_json(csv_json)
 
         return result
 

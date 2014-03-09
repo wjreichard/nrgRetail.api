@@ -1,8 +1,10 @@
 __author__ = 'rike'
 
 import pyodbc
+from config import config
 
-connection_string = 'DRIVER={SQL Server};SERVER=epdbdev01;DATABASE=enrollment0137;Trusted_Connection=yes;'
+
+connection_string = config.enrollment_connection_string
 
 
 def get_bland_slugs():

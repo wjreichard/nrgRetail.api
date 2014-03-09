@@ -3,44 +3,38 @@ from service import product_validate
 __author__ = 'rike'
 
 import json
+from config import config
 
 
-def create_products(csv_json):
+def create_products_from_json(csv_json):
 
     products = json.loads(csv_json)
-    return json.dumps(do_create_products(products), sort_keys=True)
 
-def do_create_products_1(products):
-    schema_v1 = {
-        'BrandSlug': {'is_valid_brand_slug': True, 'type': 'string'},
-        'Channel': {'is_valid_channel': True, 'type': 'string'},
-        'Extra': {'type': 'string'}
-    }
+    products = validate_products_file(products)
+    products = validate_products_row(products)
+    products = validate_products_multiple_rows(products)
 
-    validator = product_validate.ProductValidator(schema_v1)
+    return json.dumps(products, sort_keys=True)
+
+
+def validate_products_file(products):
+
+    return products
+
+
+def validate_products_row(products):
+
+    schema = json.loads(config.validation_schema)
+    validator = product_validate.ProductValidator(schema)
 
     def validated_products():
         for p in products:
             validator.validate(p)
             yield dict(p, Errors=validator.errors)
 
-
     return list(validated_products())
 
-def do_create_products(products):
-    schema_v1 = {
-        'BrandSlug': {'is_valid_brand_slug': True, 'type': 'string'},
-        'Channel': {'is_valid_channel': True, 'type': 'string'},
-        'Extra': {'type': 'string'}
-    }
 
-    validator = product_validate.ProductValidator(schema_v1)
+def validate_products_multiple_rows(products):
 
-    def validated_products():
-        for p in products:
-            validator.validate(p)
-            yield validator.errors
-
-    errors = list(validated_products())
-
-    return [dict(item[0], Errors = item[1]) for item in zip(products, errors)]
+    return products

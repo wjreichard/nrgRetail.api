@@ -21,7 +21,7 @@ def get_products():
     return "nrgRetail api.products"
 
 
-@app.route("/api/products", methods = ['POST'])
+@app.route("/api/products", methods=['POST'])
 def create_products():
 
     if not request.data:
@@ -37,6 +37,7 @@ def create_products():
     except:
         print("Unexpected error:", sys.exc_info()[0])
         abort(500)
+
 
 if __name__ == "__main__":
     app.run()

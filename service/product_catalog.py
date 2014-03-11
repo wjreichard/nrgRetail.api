@@ -3,10 +3,14 @@ from service import product_validate
 __author__ = 'rike'
 
 import json
+import logging
 from config import config
 
 
 def create_products_from_json(csv_json):
+
+    logger = logging.getLogger('api')
+    logger.info("create_products_from_json")
 
     products = json.loads(csv_json)
 

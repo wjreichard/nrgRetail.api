@@ -7,6 +7,7 @@ import unittest
 
 class TestValidateProduct(unittest.TestCase):
 
+# BEGIN Column validations
     def test_validate_brand_slug(self):
         schema = {'BrandSlug': {'is_valid_brand_slug': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
         brand_slug = {'BrandSlug': 'nrg_residential'}
@@ -71,8 +72,6 @@ class TestValidateProduct(unittest.TestCase):
         self.assertEqual(validator.validate(signupBonus5), False, 'An invalid signupBonus is passing validation')
         self.assertEqual(validator.validate(signupBonus6), False, 'An invalid signupBonus is passing validation')
 
-
-# BEGIN Simple validations
     def test_valid_premiseType(self):
         schema = {'premiseType': {'is_valid_premiseType': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
         premiseType = {'premiseType': 'residential'}
@@ -256,6 +255,8 @@ class TestValidateProduct(unittest.TestCase):
         ECF2 = {'ECF': '50'}
         ECF3 = {'ECF': '$50'}
         ECF4 = {'ECF': '$50.00'}
+        ECF5 = {'ECF': '50.001'}
+        ECF6 = {'ECF': '5.00.00'}
 
         validator = product_validate.ProductValidator(schema)
         validator.allow_unknown = True
@@ -264,6 +265,8 @@ class TestValidateProduct(unittest.TestCase):
         self.assertEqual(validator.validate(ECF2), False, 'An invalid ECF is passing validation')
         self.assertEqual(validator.validate(ECF3), False, 'An invalid ECF is passing validation')
         self.assertEqual(validator.validate(ECF4), False, 'An invalid ECF is passing validation')
+        self.assertEqual(validator.validate(ECF5), False, 'An invalid ECF is passing validation')
+        self.assertEqual(validator.validate(ECF6), False, 'An invalid ECF is passing validation')
 
     def test_valid_merchandiseVesting(self):
         schema = {'merchandiseVesting': {'is_valid_merchandiseVesting': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
@@ -296,6 +299,7 @@ class TestValidateProduct(unittest.TestCase):
         validator.allow_unknown = True
 
         self.assertEqual(validator.validate(signupVesting), True, 'A valid signupVesting is failing validation')
+        self.assertEqual(validator.validate(signupVesting2), True, 'A valid signupVesting is failing validation')
 
     def test_invalid_signupVesting(self):
         schema = {'signupVesting': {'is_valid_signupVesting': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
@@ -310,30 +314,30 @@ class TestValidateProduct(unittest.TestCase):
         self.assertEqual(validator.validate(signupVesting2), False, 'An invalid signupVesting is passing validation')
         self.assertEqual(validator.validate(signupVesting3), False, 'An invalid signupVesting is passing validation')
 
-    # def test_valid_ongoingFrequency(self):
-    #     schema = {'ongoingFrequency': {'is_valid_ongoingFrequency': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
-    #     ongoingFrequency = {'ongoingFrequency': '20 days'}
-    #     ongoingFrequency2 = {'ongoingFrequency': '24 months'}
-    #
-    #     validator = product_validate.ProductValidator(schema)
-    #     validator.allow_unknown = True
-    #
-    #     self.assertEqual(validator.validate(ongoingFrequency), True, 'A valid ongoingFrequency is failing validation')
-    #     self.assertEqual(validator.validate(ongoingFrequency2), True, 'A valid ongoingFrequency is failing validation')
-    #
-    # def test_invalid_ongoingFrequency(self):
-    #     schema = {'ongoingFrequency': {'is_valid_ongoingFrequency': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
-    #     ongoingFrequency = {'ongoingFrequency': 'foo'}
-    #     ongoingFrequency2 = {'ongoingFrequency': '1 year'}
-    #     ongoingFrequency3 = {'ongoingFrequency': '2.5 months'}
-    #
-    #     validator = product_validate.ProductValidator(schema)
-    #     validator.allow_unknown = True
-    #
-    #     self.assertEqual(validator.validate(ongoingFrequency), False, 'An invalid ongoingFrequency is passing validation')
-    #     self.assertEqual(validator.validate(ongoingFrequency2), False, 'An invalid ongoingFrequency is passing validation')
-    #     self.assertEqual(validator.validate(ongoingFrequency3), False, 'An invalid ongoingFrequency is passing validation')
-# END Simple validations
+    def test_valid_ongoingFrequency(self):
+        schema = {'ongoingFrequency': {'is_valid_ongoingFrequency': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
+        ongoingFrequency = {'ongoingFrequency': '20 days'}
+        ongoingFrequency2 = {'ongoingFrequency': '24 months'}
+
+        validator = product_validate.ProductValidator(schema)
+        validator.allow_unknown = True
+
+        self.assertEqual(validator.validate(ongoingFrequency), True, 'A valid ongoingFrequency is failing validation')
+        self.assertEqual(validator.validate(ongoingFrequency2), True, 'A valid ongoingFrequency is failing validation')
+
+    def test_invalid_ongoingFrequency(self):
+        schema = {'ongoingFrequency': {'is_valid_ongoingFrequency': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
+        ongoingFrequency = {'ongoingFrequency': 'foo'}
+        ongoingFrequency2 = {'ongoingFrequency': '1 year'}
+        ongoingFrequency3 = {'ongoingFrequency': '2.5 months'}
+
+        validator = product_validate.ProductValidator(schema)
+        validator.allow_unknown = True
+
+        self.assertEqual(validator.validate(ongoingFrequency), False, 'An invalid ongoingFrequency is passing validation')
+        self.assertEqual(validator.validate(ongoingFrequency2), False, 'An invalid ongoingFrequency is passing validation')
+        self.assertEqual(validator.validate(ongoingFrequency3), False, 'An invalid ongoingFrequency is passing validation')
+# END Column validations
 
 if __name__ == '__main__':
     unittest.main()

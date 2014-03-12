@@ -10,8 +10,12 @@ def product_catalog_create(product_catalog, user):
 
     connection = pyodbc.connect(connection_string)
     cursor = connection.cursor()
-    boo = cursor.execute("""                            INSERT INTO dbo.MMC_ProductCatalog(ProductCatalog, InsertUser) values (?,?)
-                            OUTPUT INSERTED.ProductCatalogID values('something')""", product_catalog, user)
+    boo = cursor.execute("""
+                            INSERT INTO dbo.MMC_ProductCatalog (ProductCatalog, InsertUser)
+                                OUTPUT INSERTED.ProductCatalogID
+                                VALUES (?,?)
+                        """, product_catalog, user)
+
     print('--------------------------------')
     print(boo)
     print('--------------------------------')

@@ -113,7 +113,7 @@ class ProductValidator(Validator):
 
         if not value or value.count(".") == 0 or value.count("$") != 0:
             self._error(field, "An early cancellation fee must be specified as a monetary amount (e.g. 50.00)")
-        if len(value[value.find('.'):len(value)]) > 2: #the substring representing any values to the right of the decimal
+        if len(value[value.find('.')+1:len(value)]) > 2: #the substring representing any values to the right of the decimal
             self._error(field, "An early cancellation fee must be specified as a monetary amount with two digits right of the decimal")
         try:
             if  Decimal(value) < 0.000000:
@@ -121,6 +121,14 @@ class ProductValidator(Validator):
         except:
                 self._error(field, "The ECF rate must be a positive decimal value")
 
+    def _validate_is_valid_ongoingFrequency(self, is_valid_ongoingFrequency, field, value):
+
+        if value:
+            words = value.split(' ')
+            accepted_units=["days","months"]
+
+            if words[0].isdigit() == False or words[1] not in accepted_units:
+                self._error(field, "ongoingFrequency must be formatted as a number and a unit of time (e.g. - 12 months, 20 days)")
 
 
 #BrandSlug

@@ -110,7 +110,7 @@ def get_utilityBrands():
 
     connection = pyodbc.connect(connection_string)
     cursor = connection.cursor()
-    cursor.execute("SELECT u.utilityCode, u.UtilityAbbrev, u.State, u.Commodity, b.BrandSlug FROM vw_Utilities u INNER JOIN epdata_brandUtility bu ON bu.UtilityID = u.UtilityID INNER JOIN epdata_brand b ON bu.BrandID = b.BrandID ")
+    cursor.execute("SELECT u.UtilityCode, lower(u.UtilityAbbrev) as UtilityAbbrev, lower(u.State) as State, lower(u.Commodity) as Commodity, b.BrandSlug FROM vw_Utilities u INNER JOIN epdata_brandUtility bu ON bu.UtilityID = u.UtilityID INNER JOIN epdata_brand b ON bu.BrandID = b.BrandID")
 
     rows = cursor.fetchall()
     columns = [column[0] for column in cursor.description]

@@ -23,6 +23,8 @@ try:
 
     validation_schema = parser.get('validation', 'schema')
 
+    multivalidation_schema = parser.get('multivalidation', 'schema')
+
     # Initialize flask api
     server_port = int(parser.get('flask', 'server_port'))
 

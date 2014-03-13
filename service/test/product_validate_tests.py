@@ -337,7 +337,100 @@ class TestValidateProduct(unittest.TestCase):
         self.assertEqual(validator.validate(ongoingFrequency), False, 'An invalid ongoingFrequency is passing validation')
         self.assertEqual(validator.validate(ongoingFrequency2), False, 'An invalid ongoingFrequency is passing validation')
         self.assertEqual(validator.validate(ongoingFrequency3), False, 'An invalid ongoingFrequency is passing validation')
-# END Column validations
+
+    def test_valid_utilityBrandState(self):
+        schema= {'product': {'type': 'dict', "is_valid_utilityBrandState":"True", 'schema':  { "BrandSlug": {"type": "string", "required":"True"} ,
+                                                           "Channel": {"type": "string", "required":"True"},
+                                                           "BundleName": { "type": "string"},
+                                                           "BundleDescription": { "type": "string"},
+                                                           "Commodity": { "type": "string"},
+                                                           "ECF": {"type": "string"},
+                                                           "VAS_Code": {"type": "string"},
+                                                           "LockType": { "type": "string"},
+                                                           "MerchandiseSlug": { "type": "string"},
+                                                           "MerchandiseVesting": { "type": "string"},
+                                                           "OngoingFrequency": { "type": "string"},
+                                                           "OngoingValue": { "type": "string"},
+                                                           "PartnerCode": { "type": "string"},
+                                                           "PremiseType": { "type": "string"},
+                                                           "PricingTerm": { "type": "string", "required":"True"},
+                                                           "PromoCode": { "type": "string"},
+                                                           "Rate": { "type": "string", "required":"True"},
+                                                           "SignupBonus": { "type": "string"},
+                                                           "SignupVesting": {"type": "string"},
+                                                           "StateAbbrev": { "type": "string"},
+                                                           "UtilityCode": { "type": "string"},
+                                                           "TermsOfServiceType": { "type": "string"},
+                                                           "Sunday2cents": { "type": "string"} }}}
+
+        product = {"product": {"BrandSlug": "nrg_residential", "Channel": "IB", "BundleName":"" ,
+                               "BundleDescription":"", "Commodity":"electric", "ECF":"0.00",
+                               "VAS_Code":"006", "LockType":"","MerchandiseSlug":"", "MerchandiseVesting":"",
+                               "OngoingFrequency":"", "OngoingValue":"", "PartnerCode":"NRR",
+                               "PremiseType":"residential", "PricingTerm":"6", "PromoCode":"700",
+                               "Rate":"0.12", "SignupBonus":"", "SignupVesting":"",
+                               "StateAbbrev":"pa", "UtilityCode":"16", "TermsOfServiceType":"", "Sunday2cents":"Y"}}
+
+        validator = product_validate.ProductValidator(schema)
+        validator.allow_unknown = True
+
+        self.assertEqual(validator.validate(product), True, 'A valid utilityBrandState is failing validation')
+
+    def test_invalid_utilityBrandState(self):
+        schema= {'product': {'type': 'dict', "is_valid_utilityBrandState":"True", 'schema':  { "BrandSlug": {"type": "string", "required":"True"} ,
+                                                           "Channel": {"type": "string", "required":"True"},
+                                                           "BundleName": { "type": "string"},
+                                                           "BundleDescription": { "type": "string"},
+                                                           "Commodity": { "type": "string"},
+                                                           "ECF": {"type": "string"},
+                                                           "VAS_Code": {"type": "string"},
+                                                           "LockType": { "type": "string"},
+                                                           "MerchandiseSlug": { "type": "string"},
+                                                           "MerchandiseVesting": { "type": "string"},
+                                                           "OngoingFrequency": { "type": "string"},
+                                                           "OngoingValue": { "type": "string"},
+                                                           "PartnerCode": { "type": "string"},
+                                                           "PremiseType": { "type": "string"},
+                                                           "PricingTerm": { "type": "string", "required":"True"},
+                                                           "PromoCode": { "type": "string"},
+                                                           "Rate": { "type": "string", "required":"True"},
+                                                           "SignupBonus": { "type": "string"},
+                                                           "SignupVesting": {"type": "string"},
+                                                           "StateAbbrev": { "type": "string"},
+                                                           "UtilityCode": { "type": "string"},
+                                                           "TermsOfServiceType": { "type": "string"},
+                                                           "Sunday2cents": { "type": "string"} }}}
+
+        product = {"product": {"BrandSlug": "nrg_residential", "Channel": "IB", "BundleName":"" ,
+                               "BundleDescription":"", "Commodity":"electric", "ECF":"0.00",
+                               "VAS_Code":"006", "LockType":"","MerchandiseSlug":"", "MerchandiseVesting":"",
+                               "OngoingFrequency":"", "OngoingValue":"", "PartnerCode":"NRR",
+                               "PremiseType":"residential", "PricingTerm":"6", "PromoCode":"700",
+                               "Rate":"0.12", "SignupBonus":"", "SignupVesting":"",
+                               "StateAbbrev":"md", "UtilityCode":"16", "TermsOfServiceType":"", "Sunday2cents":"Y"}}
+
+        product2 = {"product": {"BrandSlug": "energy_rewards", "Channel": "IB", "BundleName":"" ,
+                               "BundleDescription":"", "Commodity":"electric", "ECF":"0.00",
+                               "VAS_Code":"006", "LockType":"","MerchandiseSlug":"", "MerchandiseVesting":"",
+                               "OngoingFrequency":"", "OngoingValue":"", "PartnerCode":"NRR",
+                               "PremiseType":"residential", "PricingTerm":"6", "PromoCode":"700",
+                               "Rate":"0.12", "SignupBonus":"", "SignupVesting":"",
+                               "StateAbbrev":"md", "UtilityCode":"35", "TermsOfServiceType":"", "Sunday2cents":"Y"}}
+
+        product3 = {"product": {"BrandSlug": "nrg_residential", "Channel": "IB", "BundleName":"" ,
+                               "BundleDescription":"", "Commodity":"gas", "ECF":"0.00",
+                               "VAS_Code":"006", "LockType":"","MerchandiseSlug":"", "MerchandiseVesting":"",
+                               "OngoingFrequency":"", "OngoingValue":"", "PartnerCode":"NRR",
+                               "PremiseType":"residential", "PricingTerm":"6", "PromoCode":"700",
+                               "Rate":"0.12", "SignupBonus":"", "SignupVesting":"",
+                               "StateAbbrev":"md", "UtilityCode":"35", "TermsOfServiceType":"", "Sunday2cents":"Y"}}
+        validator = product_validate.ProductValidator(schema)
+        validator.allow_unknown = True
+
+        self.assertEqual(validator.validate(product), False, 'An invalid utilityBrandState is passing validation')
+        self.assertEqual(validator.validate(product2), False, 'An invalid utilityBrandState is passing validation')
+        self.assertEqual(validator.validate(product3), False, 'An invalid utilityBrandState is passing validation')
+
 
 if __name__ == '__main__':
     unittest.main()

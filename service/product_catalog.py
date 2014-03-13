@@ -75,7 +75,7 @@ def validate_products_file(csv_string):
     return errors
 
 
-def validate_products_row(products):
+def validate_products_row(products): #this is really only validation of single columns right now
 
     schema = json.loads(config.validation_schema)
     validator = product_validate.ProductValidator(schema)
@@ -87,6 +87,17 @@ def validate_products_row(products):
 
     return list(validated_products())
 
+def validate_products_intra_row(products): #this includes validation of multiple columns within a row (combined validation)
+
+    schema = json.loads(config.multivalidation_schema)
+    validator = product_validate.ProductValidator(schema)
+
+    def validated_products():
+        for p in products:
+            validator.validate(p)
+            yield dict(p, Errors=validator.errors)
+
+    return list(validated_products())
 
 def validate_products_multiple_rows(products):
     for p in products:

@@ -130,6 +130,20 @@ class ProductValidator(Validator):
             if words[0].isdigit() == False or words[1] not in accepted_units:
                 self._error(field, "ongoingFrequency must be formatted as a number and a unit of time (e.g. - 12 months, 20 days)")
 
+    def _validate_is_valid_utilityBrandState(self, is_valid_utilityBrandState, field, value):
+
+        #Define access to individual fields in the dict
+        utilityBrands = product_repository.get_utilityBrands()
+
+        #check if exists by comparison of the fields to the utilityBrandState getter
+        if not any( value['StateAbbrev'] == d['State']
+                    and value['UtilityCode'] == d['UtilityCode']
+                    and value['BrandSlug'] == d['BrandSlug']
+                    and value['Commodity'] == d['Commodity']
+                    for d in utilityBrands):
+            self._error(field, "The utility/state/brand combination supplied is invalid")
+
+
 
 #BrandSlug
 #BundleName

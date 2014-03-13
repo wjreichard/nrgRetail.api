@@ -18,11 +18,13 @@ class TestValidateUtility(unittest.TestCase):
     def test_dict_to_csv(self):
 
         dictionary = [{"BrandSlug": "energyplus", "Channel": "web"}]
-        #dictionary = {"BrandSlug": "energyplus", "Channel": "web"}
-        expected_result = '"BrandSlug","Channel"\n"energyplus","web"'.encode('utf-8')
+        expected_result = '"BrandSlug","Channel"\n"energyplus","web"\n'
 
         result = utility.dict_to_csv(dictionary)
         print(result)
+        print('')
+        print(expected_result)
+
         self.assertEqual(result, expected_result)
 
 

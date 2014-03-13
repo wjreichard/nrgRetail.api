@@ -11,44 +11,66 @@ from domain import product_catalog_repository
 from service import utility
 
 
+logger = logging.getLogger('api')
+
+
 def create_products_from_bytes(csv_bytes):
 
-    #event_slug = Enum(["New", "Validated", "Invalidated", "Activated", "Deactivated"])
-    #print(event_slug.NEW)
-
-    logger = logging.getLogger('api')
     logger.info("create_products_from_json: start.")
 
     product_catalog_id = product_catalog_repository.product_catalog_create(csv_bytes, getpass.getuser())
-    product_catalog_repository.product_catalog_event_create(product_catalog_id, 'New', getpass.getuser())
+    product_catalog_repository.product_catalog_event_create(product_catalog_id,
+                                                            config.ProductCatalogEventSlugs.New,
+                                                            getpass.getuser())
 
     file_errors = validate_products_file(csv_bytes.decode('utf-8'))
 
     if len(file_errors) is not 0:
-        errors_json = json.dumps(file_errors)
-        logger.info("create_products_from_json: validate_products_file error encountered.")
-        product_catalog_repository.product_catalog_event_create(product_catalog_id, 'Invalidated', getpass.getuser())
-        product_catalog_repository.product_catalog_failure_create(product_catalog_id, errors_json, getpass.getuser())
-        return errors_json
+        errors_csv = utility.dict_to_csv(file_errors)
+        logger.info("create_products_from_json: validate_products_file error encountered. {}".format(file_errors))
+        product_catalog_repository.product_catalog_event_create(product_catalog_id,
+                                                                config.ProductCatalogEventSlugs.Invalidated,
+                                                                getpass.getuser())
+        product_catalog_repository.product_catalog_failure_create(product_catalog_id, errors_csv, getpass.getuser())
+        return errors_csv
 
     csv_json = utility.csv_bytes_to_json(csv_bytes)
     products = json.loads(csv_json)
 
-    pipeline = [validate_products_row, validate_products_multiple_rows]
-    boo = [f(products) for f in pipeline]
-    print(boo)
+    products = validate_products_row(products)
 
-    return json.dumps(products, sort_keys=True)
+    if any(p['Errors'] != {} for p in products):
+        errors_csv = utility.dict_to_csv(products)
+        logger.info("create_products_from_json: validate_products_row error encountered. {}".format(products))
+        product_catalog_repository.product_catalog_event_create(product_catalog_id,
+                                                                config.ProductCatalogEventSlugs.Invalidated,
+                                                                getpass.getuser())
+        product_catalog_repository.product_catalog_failure_create(product_catalog_id, errors_csv, getpass.getuser())
+        return errors_csv
+    else:
+        product_catalog_repository.product_catalog_event_create(product_catalog_id,
+                                                                config.ProductCatalogEventSlugs.Validated,
+                                                                getpass.getuser())
+
+    return utility.dict_to_csv(products)
+
+    #pipeline = [validate_products_row,
+    #            validate_products_multiple_rows]
+
+    #result = [f(products) for f in pipeline]
+    #print(result)
+
+    #return json.dumps(products, sort_keys=True)
 
 
-def validate_products_file(products):
-    errors = {}
+def validate_products_file(csv_string):
+    errors = []
 
-    result = csv.Sniffer().sniff(products)
+    result = csv.Sniffer().sniff(csv_string)
+
     if result.delimiter is not ',':
-        errors = {"File Structure": "comma delimiter not found"}
+        errors = [{"Type": "File", "Message": "comma delimiter not found" }]
 
-    #print(boo.delimiter)
     #sanity check ... is this a csv ... with required headers?
     return errors
 

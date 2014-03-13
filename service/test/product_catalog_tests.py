@@ -7,13 +7,14 @@ from service.test.product_catalog_test_fixtures import test_cases
 
 class TestValidateProduct(unittest.TestCase):
 
-    def test_create_products(self):
+    def test_create_products_from_bytes(self):
 
-        csv_bytes = '"BrandSlug"|"Channel"\n"energyplus"|"web"'.encode('utf-8')
+        csv_bytes = '"BrandSlug","Channel"\n"nrg_residential","AQ"\n"nrg_residential","AQ"'.encode('utf-8')
+        expected = '"BrandSlug","Channel","Errors"\n"nrg_residential","AQ","{}"\n"nrg_residential","AQ","{}"\n'
 
         result = product_catalog.create_products_from_bytes(csv_bytes)
-        print(result)
-        assert(True is True)
+
+        self.assertEqual(expected, result)
 
 
 

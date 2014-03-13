@@ -5,6 +5,14 @@ import configparser
 import os
 import logging.config
 
+
+class Enum(set):
+    def __getattr__(self, name):
+        if name in self:
+            return name
+        raise AttributeError
+
+
 try:
 
     parser = configparser.ConfigParser()
@@ -20,6 +28,10 @@ try:
 
     # Initialize logger
     logging.config.fileConfig(os.path.dirname(__file__) + '\logging.ini')
+
+    # enums
+
+    ProductCatalogEventSlugs = Enum(["New", "Validated", "Invalidated", "Activated", "Deactivated"])
 
 
 except Exception as exception:

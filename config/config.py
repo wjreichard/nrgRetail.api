@@ -21,6 +21,7 @@ try:
     # Initialize logger
     logging.config.fileConfig(os.path.dirname(__file__) + '\logging.ini')
 
+
 except Exception as exception:
     print('Exception while configuring ERROR: {}'.format(str(exception)))
     raise

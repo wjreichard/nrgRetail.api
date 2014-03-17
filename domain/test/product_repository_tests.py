@@ -1,9 +1,7 @@
-__author__ = 'rike'
-
 import unittest
 import pyodbc
 from config import config
-from domain import product_repository
+
 
 connection_string = config.enrollment_connection_string
 

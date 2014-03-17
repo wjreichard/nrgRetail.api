@@ -1,7 +1,4 @@
 from service import product_validate
-
-__author__ = 'rike'
-
 import unittest
 
 
@@ -28,21 +25,25 @@ class TestValidateProduct(unittest.TestCase):
 
     def test_valid_channel(self):
         schema = {'Channel': {'is_valid_channel': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
-        channel = {'Channel': 'IB'}
+        channel_one = {'Channel': 'inbound_telemarketing'}
+        channel_two = {'Channel': 'web'}
 
         validator = product_validate.ProductValidator(schema)
         validator.allow_unknown = True
 
-        self.assertEqual(validator.validate(channel), True, 'A valid channel is failing validation')
+        self.assertEqual(validator.validate(channel_one), True, 'A valid channel is failing validation')
+        self.assertEqual(validator.validate(channel_two), True, 'A valid channel is failing validation')
 
     def test_invalid_channel(self):
         schema = {'Channel': {'is_valid_channel': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
-        channel = {'Channel': 'foo'}
+        channel_one = {'Channel': 'foo'}
+        channel_two = {'Channel': 'AQ'}
 
         validator = product_validate.ProductValidator(schema)
         validator.allow_unknown = True
 
-        self.assertEqual(validator.validate(channel), False, 'An invalid channel is passing validation')
+        self.assertEqual(validator.validate(channel_one), False, 'An invalid channel is passing validation')
+        self.assertEqual(validator.validate(channel_two), False, 'An invalid channel is passing validation')
 
     def test_valid_signupBonus(self):
         schema = {'signupBonus': {'is_valid_signupBonus': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
@@ -272,12 +273,16 @@ class TestValidateProduct(unittest.TestCase):
         schema = {'merchandiseVesting': {'is_valid_merchandiseVesting': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
         merchandiseVesting = {'merchandiseVesting': '20 days'}
         merchandiseVesting2 = {'merchandiseVesting': '12 months'}
+        merchandiseVesting3 = {'merchandiseVesting': '20 Days'}
+        merchandiseVesting4 = {'merchandiseVesting': '12 Months'}
 
         validator = product_validate.ProductValidator(schema)
         validator.allow_unknown = True
 
         self.assertEqual(validator.validate(merchandiseVesting), True, 'A valid merchandiseVesting is failing validation')
         self.assertEqual(validator.validate(merchandiseVesting2), True, 'A valid merchandiseVesting is failing validation')
+        self.assertEqual(validator.validate(merchandiseVesting3), True, 'A valid merchandiseVesting is failing validation')
+        self.assertEqual(validator.validate(merchandiseVesting4), True, 'A valid merchandiseVesting is failing validation')
 
     def test_invalid_merchandiseVesting(self):
         schema = {'merchandiseVesting': {'is_valid_merchandiseVesting': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
@@ -318,12 +323,16 @@ class TestValidateProduct(unittest.TestCase):
         schema = {'ongoingFrequency': {'is_valid_ongoingFrequency': True, 'type': 'string'}, 'Extra': {'type': 'string'}}
         ongoingFrequency = {'ongoingFrequency': '20 days'}
         ongoingFrequency2 = {'ongoingFrequency': '24 months'}
+        ongoingFrequency3 = {'ongoingFrequency': '20 Days'}
+        ongoingFrequency4 = {'ongoingFrequency': '24 Months'}
 
         validator = product_validate.ProductValidator(schema)
         validator.allow_unknown = True
 
         self.assertEqual(validator.validate(ongoingFrequency), True, 'A valid ongoingFrequency is failing validation')
         self.assertEqual(validator.validate(ongoingFrequency2), True, 'A valid ongoingFrequency is failing validation')
+        self.assertEqual(validator.validate(ongoingFrequency3), True, 'A valid ongoingFrequency is failing validation')
+        self.assertEqual(validator.validate(ongoingFrequency4), True, 'A valid ongoingFrequency is failing validation')
 
     def test_invalid_ongoingFrequency(self):
         schema = {'ongoingFrequency': {'is_valid_ongoingFrequency': True, 'type': 'string'}, 'Extra': {'type': 'string'}}

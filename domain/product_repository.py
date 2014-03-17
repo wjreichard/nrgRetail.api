@@ -1,5 +1,3 @@
-__author__ = 'rike'
-
 import pyodbc
 from config import config
 
@@ -26,13 +24,13 @@ def get_channels():
 
     connection = pyodbc.connect(connection_string)
     cursor = connection.cursor()
-    cursor.execute("SELECT abbrev FROM apiChannels")
+    cursor.execute("SELECT name FROM apiChannels")
 
     rows = cursor.fetchall()
 
     channels = []
     for row in rows:
-        channels.append(row.abbrev)
+        channels.append(row.name.lower().translate(str.maketrans(' ', '_')))
 
     return channels
 

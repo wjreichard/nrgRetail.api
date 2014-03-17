@@ -1,5 +1,3 @@
-__author__ = 'rike'
-
 import unittest
 from service import product_catalog
 from service.test.product_catalog_test_fixtures import test_cases
@@ -16,7 +14,13 @@ class TestValidateProduct(unittest.TestCase):
 
         self.assertEqual(expected, result)
 
+    def test_create_products_from_bytes_one_real_product(self):
 
+        csv_bytes = '"z'
+
+        result = product_catalog.create_products_from_bytes(csv_bytes)
+
+        self.assertEqual(expected, result)
 
     #def test_create_products(self):
 

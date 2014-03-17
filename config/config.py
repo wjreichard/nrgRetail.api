@@ -1,6 +1,3 @@
-__author__ = 'rike'
-
-
 import configparser
 import os
 import logging.config

@@ -1,10 +1,7 @@
 from domain import product_repository
-
-__author__ = 'rike'
-
 from cerberus import Validator
-
 from decimal import *
+
 
 class ProductValidator(Validator):
 
@@ -17,9 +14,7 @@ class ProductValidator(Validator):
 
     def _validate_is_valid_channel(self, is_valid_channel, field, value):
 
-        channels_lower_case = set(k.lower() for k in product_repository.get_channels())
-
-        if value.lower() not in channels_lower_case:
+        if value.lower() not in product_repository.get_channels():
             self._error(field, "channel does not exist")
 
     def _validate_is_valid_premiseType(self, is_valid_premiseType, field, value):
@@ -54,7 +49,7 @@ class ProductValidator(Validator):
             words = value.split(' ')
             accepted_units=["days","months"]
 
-            if words[0].isdigit() == False or words[1] not in accepted_units:
+            if words[0].isdigit() == False or words[1].lower() not in accepted_units:
                 self._error(field, "merchandiseVesting must be formatted as a number and a unit of time (e.g. - 12 months, 20 days)")
 
     def _validate_is_valid_signupBonus(self, is_valid_signupBonus, field, value):
@@ -72,7 +67,7 @@ class ProductValidator(Validator):
             words = value.split(' ')
             accepted_units=["days","months"]
 
-            if words[0].isdigit() == False or words[1] not in accepted_units:
+            if words[0].isdigit() == False or words[1].lower() not in accepted_units:
                 self._error(field, "signupVesting must be formatted as a number and a unit of time (e.g. - 12 months, 20 days)")
 
     def _validate_is_valid_sunday2cents(self, is_valid_sunday2cents, field, value):
@@ -127,10 +122,12 @@ class ProductValidator(Validator):
             words = value.split(' ')
             accepted_units=["days","months"]
 
-            if words[0].isdigit() == False or words[1] not in accepted_units:
+            if words[0].isdigit() == False or words[1].lower() not in accepted_units:
                 self._error(field, "ongoingFrequency must be formatted as a number and a unit of time (e.g. - 12 months, 20 days)")
 
     def _validate_is_valid_utilityBrandState(self, is_valid_utilityBrandState, field, value):
+
+        print(value)
 
         #Define access to individual fields in the dict
         utilityBrands = product_repository.get_utilityBrands()
@@ -142,30 +139,3 @@ class ProductValidator(Validator):
                     and value['Commodity'] == d['Commodity']
                     for d in utilityBrands):
             self._error(field, "The utility/state/brand combination supplied is invalid")
-
-
-
-#BrandSlug
-#BundleName
-#BundleDescription
-#Channel
-#Commodity
-#ECF
-#GreenPercentage / VAS_Code
-#LockType
-#MerchandiseSlug
-#MerchandiseVesting
-#OngoingFrequency
-#OngoingValue
-#PartnerCode
-#PremiseType
-#PricingTerm
-#PromoCode
-#Rate
-#SignupBonus
-#SignupVesting
-#StateAbbrev
-#Sunday2cents
-#TermsOfServiceType
-#UtilityAbbrev
-#UtilityCode

@@ -1,5 +1,3 @@
-__author__ = 'rike'
-
 import unittest
 from  config import config
 

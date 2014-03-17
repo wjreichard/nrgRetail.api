@@ -1,5 +1,3 @@
-__author__ = 'rike'
-
 import unittest
 from service import utility
 
@@ -21,11 +19,14 @@ class TestValidateUtility(unittest.TestCase):
         expected_result = '"BrandSlug","Channel"\n"energyplus","web"\n'
 
         result = utility.dict_to_csv(dictionary)
-        print(result)
-        print('')
-        print(expected_result)
 
         self.assertEqual(result, expected_result)
+
+
+    def test_sku_generator(self):
+
+        result = utility.sku_generator()
+        self.assertEqual(len(result), 13)
 
 
 if __name__ == '__main__':

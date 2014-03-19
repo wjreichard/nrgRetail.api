@@ -1,12 +1,7 @@
-import csv
-import json
-import logging
-import getpass
+import ast, csv, getpass, json, logging
 from config import config
-from domain import product_catalog_repository as repo
-from domain import mmc_sku_lookup_repository as sku_repo
-from service import product_validate
-from service import utility
+from domain import product_catalog_repository as repo, mmc_sku_lookup_repository as sku_repo
+from service import product_validate, utility
 
 
 logger = logging.getLogger('api')
@@ -35,14 +30,13 @@ def create_products_from_bytes(csv_bytes):
         errors_csv = utility.dict_to_csv(file_errors)
         repo.product_catalog_failure_insert(id, errors_csv, getpass.getuser(), True)
         return errors_csv
-    print('1')
-    print(utility.csv_bytes_to_json(csv_bytes))
-    print('2')
-    products = validate_products_individual_fields(json.loads(utility.csv_bytes_to_json(csv_bytes)))
-    #products = validate_products_multiple_fields(products)
-    #products = validate_products_multiple_rows(products)
 
-    if any(p['Errors'] != {} for p in products):
+    products = validate_products_individual_fields(json.loads(utility.csv_bytes_to_json(csv_bytes)))
+    products = validate_products_multiple_fields(products)
+    products = validate_products_multiple_rows(products)
+
+    if any(p['Errors'] != '{}' for p in products):
+        print('boo')
         logger.info('product_catalog.create_products_from_bytes(): validation error(s) encountered.')
         repo.product_catalog_event_insert(id, config.ProductCatalogEventSlugs.Invalidated, getpass.getuser(), True)
         errors_csv = utility.dict_to_csv(products)
@@ -102,13 +96,13 @@ def validate_products_individual_fields(products):
 
     logger.info('product_catalog.validate_products_individual_fields(): start.')
 
-    schema = json.loads(config.validation_schema)
+    schema = ast.literal_eval(config.validation_schema)
     validator = product_validate.ProductValidator(schema)
 
     def validated_products():
         for p in products:
             validator.validate(p)
-            yield dict(p, Errors=validator.errors)
+            yield dict(p, Errors=str(validator.errors))
 
     return list(validated_products())
 
@@ -116,19 +110,25 @@ def validate_products_individual_fields(products):
 def validate_products_multiple_fields(products):
 
     logger.info('product_catalog.validate_products_multiple_fields(): start.')
-
-    schema = json.loads(config.multivalidation_schema)
-    validator = product_validate.ProductValidator(schema)
-
-    def validated_products():
-        for p in products:
-            validator.validate(p)
-            yield dict(p, Errors=validator.errors)
-
-    return list(validated_products())
+    return products
 
 
 def validate_products_multiple_rows(products):
 
     logger.info('product_catalog.validate_products_multiple_rows(): start.')
-    return products
+
+    # check for duplicates
+    unique_products = [dict(t) for t in set([tuple(p.items()) for p in products])]
+
+    diff = products
+
+    for p in unique_products:
+        diff.remove(p)
+
+    for p in diff:
+        e = ast.literal_eval(p["Errors"])
+        e.update({ "Row": "duplicate" })
+        p["Errors"] = str(e)
+        unique_products.append(p)
+
+    return unique_products

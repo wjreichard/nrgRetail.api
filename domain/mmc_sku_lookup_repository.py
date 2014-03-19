@@ -16,6 +16,7 @@ def deactivate_products(product_catalog_id, user, commit):
                         user, product_catalog_id)
         return cursor.rowcount
 
+
 def get_active_product_catalog_id():
 
     logger.info('mmc_sku_lookup_repository.get_active_product_catalog_id(): start.')
@@ -69,14 +70,12 @@ def insert_product(product, product_catalog_id, user, commit):
                                             BundleName,
                                             BundleSlug,
                                             Channel,
-                                            ComcastPTC_Discount,
                                             Commodity,
                                             DefaultBundle,
                                             ECF,
                                             EffectiveDate,
                                             GreenPercentage,
                                             InsertUser,
-                                            LockType,
                                             Merchandise,
                                             MerchandiseSlug,
                                             MerchandiseVesting,
@@ -93,7 +92,6 @@ def insert_product(product, product_catalog_id, user, commit):
                                             SignupVesting,
                                             State,
                                             Sunday2cents,
-                                            TermsOfServiceType,
                                             UtilityAbbrev,
                                             UtilityCode,
                                             VAS_Code
@@ -102,21 +100,19 @@ def insert_product(product, product_catalog_id, user, commit):
                                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
                                          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
                                          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                                         ?, ?, ?, ?)""",
+                                         ?)""",
                                          True,
                                          product["BrandSlug"],
                                          product["BundleDescription"],
                                          product["BundleName"],
                                          product["BundleSlug"],
                                          product["Channel"],
-                                         float(product["ComcastPTC_Discount"]),
                                          product["Commodity"],
                                          bool(product["DefaultBundle"]),
                                          float(product["ECF"]),
                                          product["EffectiveDate"],
                                          product["GreenPercentage"],
                                          user,
-                                         product["LockType"],
                                          product["Merchandise"],
                                          product["MerchandiseSlug"],
                                          product["MerchandiseVesting"],
@@ -133,7 +129,6 @@ def insert_product(product, product_catalog_id, user, commit):
                                          product["SignupVesting"],
                                          product["State"],
                                          product["Sunday2cents"],
-                                         product["TermsOfServiceType"],
                                          product["UtilityAbbrev"],
                                          product["UtilityCode"],
                                          product["VAS_Code"])

@@ -16,66 +16,30 @@ class TestValidateProduct(unittest.TestCase):
 
     def test_create_products_from_bytes_one_real_product(self):
 
-        csv_bytes = '"z'
+        csv_bytes = ''
+        expected = ''
 
         result = product_catalog.create_products_from_bytes(csv_bytes)
 
         self.assertEqual(expected, result)
 
-    #def test_create_products(self):
+    def test_validate_products_multiple_rows(self):
 
-        # simpleproducts = [{"BrandSlug": "nrg_residential", "Channel": "IB"}, {"BrandSlug": "nrg_residential", "Channel": "AQ"}]
-        # simpleexpected = [{"BrandSlug": "nrg_residential", "Channel": "IB", "Errors": {}}, {"BrandSlug": "nrg_residential", "Channel": "AQ", "Errors": {}}]
-        #
-        # simpleresult = product_catalog.validate_products_row(simpleproducts)
-        #
-        # self.assertEqual(simpleresult, simpleexpected)
+        #products = [{"name": "boo"}, {"name": "foo"}, {"name": "123"}, {"name": "foo"}, {"name": "abc"}]
+        products = [{'PartnerCode': 'nrr',
+                     'Errors': {},
+                     'BrandSlug': 'nrg_residential',
+                     'PremiseType': 'residential',
+                     'BundleSlug': 'variable',
+                     'State': 'pa',
+                     'BundleDescription': 'Basic Web Variable Plan',
+                     'MerchandiseVesting': ''
+                    }]
 
-    #    products = [{"BrandSlug": "nrg_residential", "Channel": "IB", "BundleName":"" , "BundleDescription":"", "Commodity":"electric", "ECF":"0.00", "VAS_Code":"006", "LockType":"","MerchandiseSlug":"", "MerchandiseVesting":"", "OngoingFrequency":"", "OngoingValue":"", "PartnerCode":"NRR", "PremiseType":"residential", "PricingTerm":"6", "PromoCode":"700", "Rate":"0.12", "SignupBonus":"", "SignupVesting":"", "StateAbbrev":"PA", "UtilityCode":"16", "TermsOfServiceType":"", "Sunday2cents":"Y"},
-    #                {"BrandSlug": "nrg_residential", "Channel": "AQ", "BundleName":"" , "BundleDescription":"", "Commodity":"electric", "ECF":"100.00", "VAS_Code":"007", "LockType":"","MerchandiseSlug":"", "MerchandiseVesting":"", "OngoingFrequency":"", "OngoingValue":"", "PartnerCode":"NRR", "PremiseType":"residential", "PricingTerm":"12", "PromoCode":"700", "Rate":"0.8450", "SignupBonus":"", "SignupVesting":"", "StateAbbrev":"PA", "UtilityCode":"19", "TermsOfServiceType":"", "Sunday2cents":"N"}]
-    #    expected = [{"BrandSlug": "nrg_residential", "Channel": "IB", "BundleName":"" , "BundleDescription":"", "Commodity":"electric", "ECF":"0.00", "VAS_Code":"006", "LockType":"","MerchandiseSlug":"", "MerchandiseVesting":"", "OngoingFrequency":"", "OngoingValue":"", "PartnerCode":"NRR", "PremiseType":"residential", "PricingTerm":"6", "PromoCode":"700", "Rate":"0.12", "SignupBonus":"", "SignupVesting":"", "StateAbbrev":"PA", "UtilityCode":"16", "TermsOfServiceType":"", "Sunday2cents":"Y", "Errors": {}},
-    #                 {"BrandSlug": "nrg_residential", "Channel": "AQ", "BundleName":"" , "BundleDescription":"", "Commodity":"electric", "ECF":"100.00", "VAS_Code":"007", "LockType":"","MerchandiseSlug":"", "MerchandiseVesting":"", "OngoingFrequency":"", "OngoingValue":"", "PartnerCode":"NRR", "PremiseType":"residential", "PricingTerm":"12", "PromoCode":"700", "Rate":"0.8450", "SignupBonus":"", "SignupVesting":"", "StateAbbrev":"PA", "UtilityCode":"19", "TermsOfServiceType":"", "Sunday2cents":"N", "Errors": {}}]
+        result = product_catalog.validate_products_multiple_rows(products)
+        print(result)
+        #self.assertEqual(expected, result)
 
-    #    result = product_catalog.validate_products_row(products)
-
-    #    self.assertEqual(result, expected)
-
-
-
-
-
-
-
-
-
-
-
-
-    #def test_create_products_multiple_valid_products(self):
-
-    #    products = '[{"BrandSlug": "energyplus", "Channel": "web"}, ' \
-    #               '{"BrandSlug": "nrg_residential", "Channel": "Retention"}]'
-    #    expected = '[{"BrandSlug": "energyplus", "Channel": "web", "Errors": {}}, {"BrandSlug": "nrg_residential", "Channel": "Retention", "Errors": {}}]'
-    #    result = product_catalog.create_products_from_json(products)
-
-    #    assert(True is True)
-
-    #def test_do_create_products_from_fixtures(self):
-
-    #    for item in test_cases:
-    #        result = product_catalog.validate_individual_product_fields(item['products'])
-    #        self.assertEqual(result, item['expected'])
-
-    #def test_do_create_products_from_fi(self):
-    #    def mssql():
-    #        return "MIcorsql"
-
-    #    def mysql():
-    #        return "unix"
-
-    #    repository = mssql
-
-    #    print ("hello %s " % repository())
 
 if __name__ == '__main__':
     unittest.main()

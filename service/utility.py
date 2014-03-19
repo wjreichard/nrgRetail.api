@@ -65,4 +65,4 @@ def sku_generator():
     if sku_uid is '':
         raise Exception('utility.sku_generator(): After 100 tries, could not find an unused SKU')
 
-    return sku_uid
+    return sku_uid.upper()

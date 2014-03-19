@@ -12,7 +12,6 @@ class TestMmcSkuLookupRepository(unittest.TestCase):
         rows_deactivated = repo.deactivate_products(repo.get_active_product_catalog_id(), 'rike', False)
         self.assertEqual(rows_deactivated > 0, True)
 
-
     def test_get_active_product_catalog_id(self):
 
         result = repo.get_active_product_catalog_id()
@@ -27,7 +26,6 @@ class TestMmcSkuLookupRepository(unittest.TestCase):
 
         mmc_sku_lookup = repo.get_product_by_sku(some_sku_that_exists)
         self.assertEqual(mmc_sku_lookup["SKU"], some_sku_that_exists)
-
 
     def test_is_sku_not_in_use_where_sku_exists(self):
 

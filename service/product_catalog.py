@@ -1,134 +1,104 @@
-import ast, csv, getpass, json, logging
+import getpass
+import json
+import logging
 from config import config
-from domain import product_catalog_repository as repo, mmc_sku_lookup_repository as sku_repo
-from service import product_validate, utility
+from decimal import *
+from domain import product_catalog_repository as repo
+from domain import mmc_sku_lookup_repository as sku_repo
+from service import products_validate_individual_fields as field_validator
+from service import products_validate_file as file_validator
+from service import products_validate_multiple_fields as multi_field_validator
+from service import products_validate_multiple_rows as multi_row_validator
+from service import utility
 
 
 logger = logging.getLogger('api')
 
 
-def get_active_products():
-
-    logger.info('product_catalog.create_products_from_json(): start.')
+def get_active_products_as_csv():
+    logger.debug('product_catalog.create_products_from_json(): start.')
+    logger.info('product catalog get_active products as csv initiated.')
     return utility.dict_to_csv(sku_repo.get_active_products())
 
 
-def create_products_from_bytes(csv_bytes):
+def get_active_products_as_json():
+    logger.debug('product_catalog.create_products_from_json(): start.')
+    logger.info('product catalog get_active products as json initiated.')
 
-    logger.info('product_catalog.create_products_from_bytes(): start.')
+    def decimal_default(obj):
+        if isinstance(obj, Decimal):
+            return float(obj)
+        raise TypeError
 
-    csv_string = csv_bytes.decode('utf-8')
+    return json.dumps(sku_repo.get_active_products(), default=decimal_default)
 
-    id = repo.product_catalog_insert(csv_string, getpass.getuser(), True)
-    repo.product_catalog_event_insert(id, config.ProductCatalogEventSlugs.New, getpass.getuser(), True)
 
-    file_errors = validate_products_file(csv_string)
+def activate_products_from_bytes(csv_bytes):
+    logger.debug('product_catalog.activate_products_from_bytes(): start.')
+    logger.info('product catalog activate initiated.')
 
-    if len(file_errors) is not 0:
-        logger.warn('product_catalog.create_products_from_bytes(): validate_products_file is invalid id: {}'.format(id))
-        repo.product_catalog_event_insert(id, config.ProductCatalogEventSlugs.Invalidated, getpass.getuser(), True)
-        errors_csv = utility.dict_to_csv(file_errors)
-        repo.product_catalog_failure_insert(id, errors_csv, getpass.getuser(), True)
-        return errors_csv
+    user = getpass.getuser()
+    csv = csv_bytes.decode('utf-8')
 
-    products = validate_products_individual_fields(json.loads(utility.csv_bytes_to_json(csv_bytes)))
-    products = validate_products_multiple_fields(products)
-    products = validate_products_multiple_rows(products)
+    id = repo.product_catalog_insert(csv, user, True)
+    repo.product_catalog_event_insert(id, config.ProductCatalogEventSlugs.New, user, True)
+
+    products = validate(csv)
 
     if any(p['Errors'] != '{}' for p in products):
-        print('boo')
-        logger.info('product_catalog.create_products_from_bytes(): validation error(s) encountered.')
-        repo.product_catalog_event_insert(id, config.ProductCatalogEventSlugs.Invalidated, getpass.getuser(), True)
-        errors_csv = utility.dict_to_csv(products)
-        repo.product_catalog_failure_insert(id, errors_csv, getpass.getuser(), True)
-        return errors_csv
-    else:
-        logger.info('product_catalog.create_products_from_bytes: validation successful.')
-        repo.product_catalog_event_insert(id, config.ProductCatalogEventSlugs.Validated, getpass.getuser(), True)
+        post_errors(id, products, True)
+        return utility.dict_to_csv(products)
 
-    mmc_sku_lookup_update(products, id)
+    logger.info('product catalog activate validation successful.')
+    repo.product_catalog_event_insert(id, config.ProductCatalogEventSlugs.Validated, user, True)
 
-    repo.product_catalog_event_insert(id, config.ProductCatalogEventSlugs.Activated, getpass.getuser(), True)
+    sku_repo.activate_products(products, id, user, True)
+
+    logger.info('product catalog activate complete.')
+    repo.product_catalog_event_insert(id, config.ProductCatalogEventSlugs.Activated, user, True)
 
     return utility.dict_to_csv([{"Status": "Success"}])
-    #return utility.dict_to_csv(sku_repo.mmc_sku_lookup_get_active())
 
 
-    #pipeline = [validate_products_row,
-    #            validate_products_multiple_rows]
+def post_errors(product_catalog_id, errors, commit):
+    logger.debug('product_catalog.post_errors(): start.')
 
-    #result = [f(products) for f in pipeline]
+    logger.warn('product_catalog.post_errors(): validate is invalid. ProductCatalogID: {}'
+                .format(product_catalog_id))
 
-    #return json.dumps(products, sort_keys=True)
+    repo.product_catalog_event_insert(product_catalog_id,
+                                      config.ProductCatalogEventSlugs.Invalidated,
+                                      getpass.getuser(),
+                                      commit)
 
-
-def mmc_sku_lookup_update(products, product_category_id):
-
-    logger.info('product_catalog.mmc_sku_lookup_update(): start.')
-
-    deactivate_product_category_id = sku_repo.get_active_product_catalog_id()
-    logger.info('product_catalog.mmc_sku_lookup_update(): deactivating product catalog id: {0}.'
-               .format(deactivate_product_category_id))
-    sku_repo.deactivate_products(deactivate_product_category_id, getpass.getuser(), True)
-
-    for p in products:
-        p["SKU"] = utility.sku_generator()
-        logger.info('product_catalog.mmc_sku_lookup_update(): insert product SKU: {0}.'.format(p["SKU"]))
-        sku_repo.insert_product(p, product_category_id, getpass.getuser(), True)
+    return repo.product_catalog_failure_insert(product_catalog_id,
+                                               utility.dict_to_csv(errors),
+                                               getpass.getuser(),
+                                               commit)
 
 
-def validate_products_file(csv_string):
+def validate(csv):
+    logger.debug('product_catalog.validate(): start.')
+    logger.info('product catalog validate initiated.')
 
-    logger.info('product_catalog.validate_products_file(): start.')
+    errors = file_validator.validate(csv)
+    if errors:
+        return errors
 
-    errors = []
+    products = field_validator.validate(json.loads(utility.csv_to_json(csv)))
+    products = multi_field_validator.validate(products)
+    products = multi_row_validator.validate(products)
 
-    result = csv.Sniffer().sniff(csv_string)
-
-    if result.delimiter is not ',':
-        errors = [{"Type": "File", "Message": "comma delimiter not found" }]
-
-    #sanity check ... is this a csv ... with required headers?
-    return errors
-
-
-def validate_products_individual_fields(products):
-
-    logger.info('product_catalog.validate_products_individual_fields(): start.')
-
-    schema = ast.literal_eval(config.validation_schema)
-    validator = product_validate.ProductValidator(schema)
-
-    def validated_products():
-        for p in products:
-            validator.validate(p)
-            yield dict(p, Errors=str(validator.errors))
-
-    return list(validated_products())
-
-
-def validate_products_multiple_fields(products):
-
-    logger.info('product_catalog.validate_products_multiple_fields(): start.')
     return products
 
 
-def validate_products_multiple_rows(products):
+def validate_products_from_bytes(csv_bytes):
+    logger.debug('product_catalog.validate_products_from_bytes(): start.')
+    logger.info('product catalog validate products from bytes initiated.')
 
-    logger.info('product_catalog.validate_products_multiple_rows(): start.')
+    results = validate(csv_bytes.decode('utf-8'))
 
-    # check for duplicates
-    unique_products = [dict(t) for t in set([tuple(p.items()) for p in products])]
+    if any(e['Errors'] != '{}' for e in results):
+        return utility.dict_to_csv(results)
 
-    diff = products
-
-    for p in unique_products:
-        diff.remove(p)
-
-    for p in diff:
-        e = ast.literal_eval(p["Errors"])
-        e.update({ "Row": "duplicate" })
-        p["Errors"] = str(e)
-        unique_products.append(p)
-
-    return unique_products
+    return utility.dict_to_csv([{"Status": "Success"}])

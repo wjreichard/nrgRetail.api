@@ -6,7 +6,6 @@ connection_string = config.enrollment_connection_string
 
 
 def product_catalog_insert(product_catalog, user, commit):
-
     with repository.open_db_connection(connection_string, commit) as cursor:
         cursor.execute("""
                           INSERT INTO dbo.MMC_ProductCatalog (ProductCatalog, InsertUser)
@@ -19,7 +18,6 @@ def product_catalog_insert(product_catalog, user, commit):
 
 
 def product_catalog_event_insert(product_catalog_id, product_catalog_slug, user, commit):
-
     with repository.open_db_connection(connection_string, commit) as cursor:
         cursor.execute("""
                         INSERT INTO dbo.MMC_ProductCatalogEvent (ProductCatalogID, ProductCatalogEventSlug, InsertUser)
@@ -32,7 +30,6 @@ def product_catalog_event_insert(product_catalog_id, product_catalog_slug, user,
 
 
 def product_catalog_failure_insert(product_catalog_id, errors, user, commit):
-
     with repository.open_db_connection(connection_string, commit) as cursor:
         cursor.execute("""
                         INSERT INTO dbo.MMC_ProductCatalogFailure (ProductCatalogID, Errors, InsertUser)

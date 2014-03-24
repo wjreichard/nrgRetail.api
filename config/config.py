@@ -1,6 +1,8 @@
+import ast
 import configparser
 import os
 import logging.config
+import re
 
 
 class Enum(set):
@@ -20,6 +22,8 @@ try:
 
     validation_schema = parser.get('validation', 'schema')
 
+    columns = ast.literal_eval(parser.get('validation', 'columns'))
+
     # Initialize flask api
     server_port = int(parser.get('flask', 'server_port'))
 
@@ -28,8 +32,14 @@ try:
 
     # enums
 
+    LockTypes = Enum(["Intro", "Contract", "Indexed"])
     ProductCatalogEventSlugs = Enum(["New", "Validated", "Invalidated", "Activated", "Deactivated"])
+    TermsOfServiceTypes = Enum(["Fixed", "Variable", "Indexed"])
 
+    # regex
+
+    regex_currency = re.compile(r'^\$?(((\d{1,3},)+\d{3})|\d+)\.\d{2}$')
+    regex_rate = re.compile(r'^(?=.*[1-9])\d*\.(\d{1,5})?$')
 
 except Exception as exception:
     print('Exception while configuring ERROR: {}'.format(str(exception)))

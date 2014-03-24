@@ -1,0 +1,27 @@
+/*style.css*/
+body{
+    background: #000000;
+}
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 1075px;
+    height: 600px;
+    font-family: Arial, sans-serif;
+    font-size: 9pt
+}
+.x-grid3-hd-inner {
+  font-size: 9pt !important;
+  font-weight: bold !important;
+}
+textarea{
+    display: block;
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 2px;
+    border: 0px;
+    outline: 0px;
+    width: 815px;
+    height: 200px;
+    resize: none;
+    -webkit-box-shadow: 0px 0px 5px #555;
+}

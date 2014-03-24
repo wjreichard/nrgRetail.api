@@ -1,5 +1,4 @@
-import pyodbc
-import sys
+import pyodbc, sys
 from contextlib import contextmanager
 from config import config
 
@@ -28,7 +27,6 @@ def open_db_connection(connection_string, commit=False):
 
 
 def is_table(schema, table):
-
     with open_db_connection(enrollment_connection_string) as cursor:
         cursor.execute("""
                             SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{0}'

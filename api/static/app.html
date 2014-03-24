@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+    <head lang="en">
+        <meta charset="utf-8">
+        <title>nrg+ Product Catalog</title>
+        <link href="scripts/angular-ui-ng-grid/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="scripts/angular-ui-ng-grid/lib/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="scripts/angular-ui-ng-grid/ng-grid.css" />
+        <link rel="stylesheet" type="text/css" href="scripts/jquery-ui-1.10.4.custom/css/ui-darkness/jquery-ui-1.10.4.custom.css" />
+        <link rel="stylesheet" type="text/css" href="style/style.css" />
+        <script type="text/javascript" src="scripts/jquery-1.8.2/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="scripts/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+        <script type="text/javascript" src="scripts/angular-ui-ng-grid//lib/angular.min.js"></script>
+        <script type="text/javascript" src="scripts/angular-ui-ng-grid/ng-grid-2.0.7.min.js"></script>
+        <script type="text/javascript" src="scripts/angular-ui-ng-grid/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="scripts/main.js"></script>
+    </head>
+    <body ng-controller="MyCtrl">
+        <div class="container">
+            <div class="row">
+                <div class="span12"><img src="images/nrg_logo.jpg" vspace="10px"></div>
+            </div>
+            <div class="row">
+                <div class="hero-unit" style="border-radius: 10px;">
+                    <div class="row">
+                        <div class="span8">
+                            <h3><i style="margin-top: 10px; margin-right: 5px; margin-left: 0px;" class="icon-star"></i>product catalog&nbsp;<img ng-class="{ invisible: loading != true }" src="images/loading.gif" alt="loading" style="margin-bottom: 3px"/> </h3>
+                        </div>
+                        <div class="span3">
+                            <button type="button" id="btnProducts" class="btn" ng-click="products()" ng-disabled="productsDisabled">products</button>
+                            <button type="button" id="btnValidate" class="btn" ng-click="validate()" ng-disabled="validateDisabled">validate</button>
+                            <button type="button" id="btnActivate" class="btn" ng-click="activate()" ng-disabled="activateDisabled">activate</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="gridStyle span12" ng-grid="gridSkus"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activate -->
+
+            <div class="container modal" id="activateDialog" style="display: none; width: 900px; height: 480px; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px">
+                <div style="position:absolute; left:20px;">
+                    <i class="icon-move"></i>
+                </div>
+                <div style="position:absolute; right:20px;">
+                    <i class="icon-remove-sign" ng-click="closeActivateDialog();"></i>
+                </div>
+                <div style="width: 880px; height: 430px; border-radius: 5px; margin-top: 20px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px; background-color: #fdfdfd">
+                    <h3 style="padding-left: 10px; padding-top: 10px;">activate&nbsp;<img ng-class="{ invisible: activateDialogLoading != true }" src="images/loading.gif" alt="loading" style="margin-bottom: 3px" /> </h3>
+                    <div style="width: 835px; height: 300px; border:1px solid gray; border-radius: 10px; margin-top: 10px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; background-color: white;">
+                        <div style="margin-bottom: 20px;">Paste Product Catalog CSV in textbox and Click 'activate' </div>
+
+                        <div style="margin-bottom: 20px;"><textarea id="activateData" ng-model="activateData"></textarea></div>
+
+                        <div style="text-align:right; padding-right: 10px;"><input id="btnActivatePost" class="btn" style="width: 80px" type="button" value="activate" ng-click="activatePost()" ng-disabled="activateButtonDisabled" /></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products -->
+
+            <div class="container modal" id="productsDialog" style="display: none; width: 900px; height: 480px; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px">
+                <div style="position:absolute; left:20px;">
+                    <i class="icon-move"></i>
+                </div>
+                <div style="position:absolute; right:20px;">
+                    <i class="icon-remove-sign" ng-click="closeProductsDialog();"></i>
+                </div>
+                <div style="width: 880px; height: 430px; border-radius: 5px; margin-top: 20px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px; background-color: #fdfdfd">
+                    <h3 style="padding-left: 10px; padding-top: 10px;">products&nbsp;<img ng-class="{ invisible: productsDialogLoading != true }" src="images/loading.gif" alt="loading" style="margin-bottom: 3px" /> </h3>
+                    <div style="width: 835px; height: 300px; border:1px solid gray; border-radius: 10px; margin-top: 10px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; background-color: white;">
+                        <div style="margin-bottom: 20px;">Click 'get' to retrieve active products </div>
+
+                        <div style="margin-bottom: 20px;"><textarea id="productsData" ng-model="productsData"></textarea></div>
+
+                        <div style="text-align:right; padding-right: 10px;"><input id="btnProductsPost" class="btn" style="width: 80px" type="button" value="get" ng-click="productsPost()" ng-disabled="productsButtonDisabled" /></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validate -->
+
+            <div class="container modal" id="validateDialog" style="display: none; width: 900px; height: 480px; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px">
+                <div style="position:absolute; left:20px;">
+                    <i class="icon-move"></i>
+                </div>
+                <div style="position:absolute; right:20px;">
+                    <i class="icon-remove-sign" ng-click="closeValidateDialog();"></i>
+                </div>
+                <div style="width: 880px; height: 430px; border-radius: 5px; margin-top: 20px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px; background-color: #fdfdfd">
+                    <h3 style="padding-left: 10px; padding-top: 10px;">validate&nbsp;<img ng-class="{ invisible: validateDialogLoading != true }" src="images/loading.gif" alt="loading" style="margin-bottom: 3px" /> </h3>
+                    <div style="width: 835px; height: 300px; border:1px solid gray; border-radius: 10px; margin-top: 10px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; background-color: white;">
+                        <div style="margin-bottom: 20px;">Paste Product Catalog CSV in textbox and Click 'validate'</div>
+
+                        <div style="margin-bottom: 20px;"><textarea id="csvData" ng-model="csvData"></textarea></div>
+
+                        <div style="text-align:right; padding-right: 10px;"><input id="btnValidatePost" class="btn" style="width: 80px" type="button" value="validate" ng-click="validatePost()" ng-disabled="validateButtonDisabled" /></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
